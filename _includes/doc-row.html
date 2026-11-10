@@ -1,0 +1,11 @@
+{# One row in a list of guides / posts. Expects `d`. #}
+<a class="row" href="{{ url(d.url) }}" data-cat="{{ d.category.slug if d.category else '' }}" data-text="{{ (d.title ~ ' ' ~ d.description ~ ' ' ~ (d.category.title if d.category else '') ~ ' ' ~ (d.tags | map(attribute='title') | join(' '))) | lower }}">
+  <span class="row__main">
+    <span class="row__title">{% if d.pinned %}<span class="row__pin" title="Pinned">{{ icon('pin', 14) }}<span class="sr-only">Pinned: </span></span>{% endif %}{{ d.title }}</span>
+    {% if d.description %}<span class="row__desc">{{ d.description }}</span>{% endif %}
+  </span>
+  <span class="row__meta">
+    {% if d.kind == 'post' %}<time datetime="{{ d.date | iso }}">{{ d.date | date }}</time>
+    {% elif d.category %}<span class="tag">{{ d.category.title }}</span>{% endif %}
+  </span>
+</a>

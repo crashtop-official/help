@@ -1,0 +1,40 @@
+{# Layout for files in _article/  →  /articles/<slug>/ #}
+{% extends "doc.html" %}
+
+{% block mobilenav %}
+<details class="navdrop">
+  <summary><span><span class="navdrop__cat">{{ page.category.title if page.category else 'Guides' }} / </span>{{ page.title }}</span>{{ icon('chevron', 16) }}</summary>
+  <nav aria-label="Guides in this topic">
+    {% for d in articles if (not page.category) or (d.category and d.category.slug == page.category.slug) %}
+    <a href="{{ url(d.url) }}"{% if d.url == page.url %} class="is-active" aria-current="page"{% endif %}>{{ d.title }}</a>
+    {% endfor %}
+    <a class="more" href="{{ url('/' ~ site.paths.article ~ '/') }}">All guides</a>
+  </nav>
+</details>
+{% endblock %}
+
+{% block sidenav %}
+<nav aria-label="All guides">
+  {% for t in topics if t.articles %}
+  <div class="sidenav__group">
+    <div class="eyebrow">{{ t.title | upper }}</div>
+    {% for d in t.articles %}
+    <a href="{{ url(d.url) }}"{% if d.url == page.url %} class="is-active" aria-current="page"{% endif %}>{{ d.title }}</a>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</nav>
+{% endblock %}
+
+{% block rail %}
+{% if page.stage %}
+<div class="rail" role="img" aria-label="This guide belongs to stage {{ page.stage }} of a round.">
+  {% for s in stages %}
+  <div class="rail__step{% if s.n | string == page.stage | string %} is-here tone-{{ s.tone }}{% endif %}">
+    <span class="rail__bar"></span>
+    <span class="rail__label">{{ s.n | two }} {{ s.title }}</span>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

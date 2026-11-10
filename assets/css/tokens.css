@@ -1,0 +1,193 @@
+/* CrashTop — generated from tokens.json */
+:root, [data-theme="dark"] {
+  --bg-000: #0b0c0d; /* Outermost ground: the backdrop behind email cards. */
+  --bg-100: #101112; /* App page background, input fills, stat cells. The default surface. */
+  --bg-200: #151617; /* The crash chart stage; ring colour around chart dots. */
+  --bg-300: #1b1c1d; /* Idle / waiting status badge background. */
+  --bg-400: #1e1f20; /* Neutral chips (AUTO target) and chart grid lines. */
+  --bg-500: #232324; /* Raised cards (email card), header bottom border, quiet dividers. */
+  --bg-600: #2e2e30; /* Active segmented tab, progress tracks, hover fill on field buttons. */
+  --line-100: var(--bg-500); /* Hairline under the top bar and inside cards. */
+  --line-200: #3a3a3c; /* Field borders, table rules, stat-grid gutters, chart axis, scrollbar thumb. Note: 1.67:1 on bg-100, decorative only; a control relying on it alone fails the 3:1 border rule. */
+  --line-300: #5a5a5c; /* Focused field border, outline (secondary) action button, scrollbar hover. Note: 2.75:1 on bg-100, just under 3:1 for control borders. */
+  --ink-100: #eceae4; /* Primary text and headings on any bg-*. 15.7:1 on bg-100. */
+  --ink-200: #dddbd5; /* Chat message body. */
+  --ink-300: #c6c5c0; /* Footer links, waiting badge text. */
+  --ink-400: #b8b7b2; /* Email body copy on bg-500 cards (7.8:1). */
+  --ink-500: #a3a29e; /* Secondary text: inactive nav and tabs, stat labels, table text (7.4:1 on bg-100). */
+  --ink-600: #8e8d88; /* Email footer fine print (5.9:1 on bg-000). */
+  --ink-700: #77766f; /* Field hints and units (min · max, ×, USDT). Note: 4.15:1 on bg-100, fails 4.5:1 at 11px; kept from source, use ink-600 for new text. */
+  --ink-800: #5f5e5a; /* Placeholders and the multiplier while waiting. Note: 2.9:1, placeholder/disabled only. */
+  --brand: #ff7700; /* The logo mark's orange. Brand moments: logo, cover, marketing. */
+  --accent: #ff6c15; /* UI accent (the game's `accent` default): active nav underline, curve, player names, pending bet. 6.4:1 on bg-100; bg-100 text on it is 6.4:1. */
+  --accent-amber: #ff7700; /* Email accent and link hover: eyebrows, step numbers, email button fill (bg-100 text on it 9.5:1). */
+  --accent-mint: #33b464; /* Alternate accent option offered by the game's accent tweak. */
+  --accent-sky: #8fb8ff; /* Alternate accent option offered by the game's accent tweak. */
+  --action-top: #ff9635; /* Main action button gradient, top stop. */
+  --action-bottom: #f7871c; /* Main action button gradient, bottom stop. */
+  --action-border: #ca5015; /* 1px border of the main action button. */
+  --action-ink: #702e10e6; /* Label on the main action button (21px bold: large text, about 4:1). */
+  --win: #4ade80; /* Positive: multiplier ≥ 2×, cashed out, profit, live dot. */
+  --win-bg: #10241a; /* Background behind win text (chips, badges); win on it 9.4:1. */
+  --win-bg-strong: #1a3d29; /* Profit chip in the bets table. */
+  --win-ring: rgba(74,222,128,0.18); /* Halo around the live dot. */
+  --loss: #ff7a6b; /* Negative: multiplier < 2×, missed target, lost bets, chart curve when red. */
+  --loss-bg: #2a1615; /* Background behind loss text; loss on it 6.7:1. */
+  --loss-tint: rgba(255,122,107,0.08); /* Faint red wash (chart area under a losing curve). */
+  --bust: #e55a5a; /* Crashed multiplier colour (the game's `bust` default). Note: 2.95:1 on bg-200, fails even for large text; prefer bust-alt. */
+  --bust-alt: #e88e8e; /* Readable bust option (6.2:1 on bg-200). */
+  --danger: #e5484d; /* Destructive / error, third bust option (4.6:1 on bg-200). */
+  --gold: #f78522; /* Rare high rounds ≥ 10×, 'Highest' stat. */
+  --gold-bg: #2b1d10; /* Chip background for ≥ 10× rounds; gold on it 9.5:1. */
+  --pending-bg: #2a2018; /* Chip background for an armed bet target (accent text on it). */
+  --black: var(--bg-100); /* Legacy name used by the CrashTop Redesign artboards (var(--black)). */
+  --grey: var(--bg-500); /* Legacy name used by the CrashTop Redesign artboards (var(--grey)). */
+  --ring-live: 0 0 0 2px #4ade8032; /* Halo around the live status dot. */
+  --ring-dot: 0 0 0 2px #151617; /* Cut-out ring around chart cash-out dots (bg-200). */
+  --underline-active: inset 0 -2px 0 #ff6515; /* Active nav link / tab underline in accent. */
+}
+:root {
+  --space-0\.5: 2px; /* Gap between label and value in a button. */
+  --space-1: 4px; /* Tight gaps, chip padding. */
+  --space-1\.5: 6px; /* Chip vertical padding, small gaps. */
+  --space-2: 8px; /* Default inline gap; top-bar vertical padding. */
+  --space-2\.5: 10px; /* Stat cell vertical padding, chip horizontal padding, stage gap. */
+  --space-3: 12px; /* Grid gutter between columns; cell horizontal padding. */
+  --space-4: 16px; /* Page side padding, panel padding. */
+  --space-6: 24px; /* Nav link gap; email block spacing. */
+  --space-8: 32px; /* Header group gap. */
+  --space-10: 40px; /* Email card padding. */
+  --radius-default: 2px; /* Chips, tabs, progress tracks, logo frame. */
+  --radius-sm: 4px; /* Inputs, buttons, badges, stat grids. */
+  --radius-md: 8px; /* Chart stage, cards, main action button. */
+  --radius-full: 9999px; /* Dots and markers. */
+  --control-h: 44px; /* Inputs and touch targets. */
+  --tab-h: 40px; /* Segmented tabs (Manual / Auto). */
+  --action-h: 64px; /* Minimum height of the main action button. */
+  --col-left: 300px; /* Bet panel column width. */
+  --col-right: 340px; /* Side column (players / chat) width. */
+  --container: 1600px; /* Max width of header and content. */
+  --font-sans: 'IBM Plex Sans', 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'IBM Plex Mono', Menlo, Consolas, 'Courier New', monospace;
+  --font-label: Tahoma, 'Segoe UI', sans-serif;
+  --text-multiplier: 600 104px/1 var(--font-mono); /* The live multiplier. Fluid in product: clamp(56px, 8vw, 104px), tabular numerals. */
+  --text-email-title: 600 30px/1.15 var(--font-sans); /* Email headline. */
+  --text-action-label: 700 21px/1.2 var(--font-sans); /* Main action button label. */
+  --text-wordmark: 600 15px/1 var(--font-mono); /* Wordmark next to the logo, uppercase. */
+  --text-body: 400 15px/1.65 var(--font-sans); /* Paragraphs, email copy. */
+  --text-ui: 500 14px/1.4 var(--font-sans); /* Nav links, tabs, buttons. */
+  --text-small: 500 13px/1.5 var(--font-sans); /* Sub-tabs, table text, small headings. */
+  --text-caption: 400 12px/1.65 var(--font-sans); /* Footers, fine print. */
+  --text-text-default: 400 11px/1.5 var(--font-label);
+  --text-input-value: 400 18px/1.3 var(--font-mono); /* Bet amount and auto cash-out inputs; Players stat. */
+  --text-stat: 400 15px/1.4 var(--font-mono); /* Stat values in the stat grid. */
+  --text-data: 400 13px/1.5 var(--font-mono); /* Tables, hashes, detail rows. */
+  --text-chip: 500 12px/1.3 var(--font-mono); /* History chips and badges, tabular numerals. */
+  --text-eyebrow: 600 11px/1.3 var(--font-mono); /* Uppercase section eyebrows (emails). */
+  --text-field-label: 400 11px/1.5 var(--font-label); /* Stat labels and field hints in the game panel. */
+}
+.multiplier {
+  font-family: var(--font-mono);
+  font-size: 104px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+.email-title {
+  font-family: var(--font-sans);
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+.action-label {
+  font-family: var(--font-sans);
+  font-size: 21px;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.wordmark {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+.body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.ui {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.small {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.caption {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.65;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.text-default {
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.input-value {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  line-height: 1.3;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.stat {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.4;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.data {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+}
+.chip {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+.field-label {
+  font-family: var(--font-label);
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 400;
+  letter-spacing: 0;
+}

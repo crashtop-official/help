@@ -1,0 +1,14 @@
+<footer class="site-footer">
+  <div class="container site-footer__in">
+    <span>{{ site.legal_note }}</span>
+    <nav aria-label="Footer">
+      <a href="{{ site.main_site_url }}">{{ site.main_site_url | replace('https://', '') | replace('http://', '') }}</a>
+      {% for item in site.footer_links %}
+      <a href="{{ url(item.url) }}">{{ item.label }}</a>
+      {% endfor %}
+      {% if site.verifier_url %}<a href="{{ site.verifier_url }}" rel="noopener">{{ site.verifier_label }}</a>{% endif %}
+      {% if site.telegram_url %}<a href="{{ site.telegram_url }}" rel="noopener">Telegram</a>{% endif %}
+      {% if site.x_url %}<a href="{{ site.x_url }}" rel="noopener">X</a>{% endif %}
+    </nav>
+  </div>
+</footer>

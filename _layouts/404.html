@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+<main id="main" class="container notfound">
+  <div class="notfound__code">0.00×</div>
+  <h1>This page crashed before it started.</h1>
+  <p class="lede">The address may have changed, or the guide was removed. Search from the help home, or go back to the game.</p>
+  <div class="notfound__actions">
+    <a class="btn btn--primary" href="{{ url('/') }}">Help home</a>
+    <a class="btn btn--outline" href="{{ site.main_site_url }}">{{ site.main_site_label }}</a>
+  </div>
+</main>
+{% endblock %}

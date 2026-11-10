@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block body %}
+<main id="main" class="container listpage">
+  <header class="doc__head">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a href="{{ url('/') }}">Help</a><span aria-hidden="true">/</span><span class="crumbs__here">{{ heading }}</span>
+    </nav>
+    <div class="eyebrow eyebrow--accent">{{ eyebrow }}</div>
+    <h1>{{ heading }}</h1>
+    {% if intro %}<p class="lede">{{ intro }}</p>{% endif %}
+  </header>
+  {% for g in groups %}
+  <section class="listpage__group">
+    {% if g.title %}<h2>{% if g.url %}<a href="{{ url(g.url) }}">{{ g.title }}</a>{% else %}{{ g.title }}{% endif %}</h2>{% endif %}
+    <div class="rows">
+      {% for d in g.docs %}{% include "doc-row.html" %}{% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+</main>
+{% endblock %}

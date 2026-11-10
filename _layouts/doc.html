@@ -1,0 +1,101 @@
+{# Shared layout for one piece of content. article.html, post.html and page.html extend it. #}
+{% extends "base.html" %}
+{% set kind_url = '/' ~ site.paths[page.kind] ~ '/' if site.paths[page.kind] else '/' %}
+{% block head %}
+<script type="application/ld+json">
+{{ {
+  "@context": "https://schema.org",
+  "@type": "Article" if page.kind != "page" else "WebPage",
+  "headline": page.title,
+  "description": page.description,
+  "datePublished": page.date | iso,
+  "dateModified": page.updated | iso,
+  "author": {"@type": "Organization", "name": page.author},
+  "mainEntityOfPage": abs_url(page.url)
+} | tojson }}
+</script>
+{% endblock %}
+{% block body %}
+<div class="container container--wide">
+
+  {% block mobilenav %}{% endblock %}
+
+  <div class="doc{% if not self.sidenav() | trim %} doc--nosidenav{% endif %}">
+    <div class="doc__sidenav">{% block sidenav %}{% endblock %}</div>
+
+    <main id="main" class="doc__main">
+      <header class="doc__head">
+        <nav class="crumbs" aria-label="Breadcrumb">
+          <a href="{{ url('/') }}">Help</a>
+          {% if page.kind == 'post' %}<span aria-hidden="true">/</span><a href="{{ url(kind_url) }}">Updates</a>{% endif %}
+          {% if page.category %}<span aria-hidden="true">/</span><a href="{{ url(page.category.url) }}">{{ page.category.title }}</a>{% endif %}
+          <span aria-hidden="true">/</span><span class="crumbs__here">{{ page.title }}</span>
+        </nav>
+        <h1>{{ page.title }}</h1>
+        {% if page.description %}<p class="lede">{{ page.description }}</p>{% endif %}
+        {% block meta %}
+        <div class="doc__meta">
+          {% if page.author %}<span>{{ page.author }}</span>{% endif %}
+          <time datetime="{{ page.date | iso }}">{{ page.date | date }}</time>
+          <span>{{ page.minutes }} min read</span>
+        </div>
+        {% endblock %}
+        {% block rail %}{% endblock %}
+      </header>
+
+      {% if page.toc %}
+      <details class="toc-inline">
+        <summary>On this page {{ icon('chevron', 16) }}</summary>
+        <nav aria-label="On this page">
+          {% for h in page.toc %}<a class="lv{{ h.level }}" href="#{{ h.id }}">{{ h.title }}</a>{% endfor %}
+        </nav>
+      </details>
+      {% endif %}
+
+      <article class="prose">
+        {{ page.content }}
+      </article>
+
+      {% if page.tags %}
+      <div class="taglist" aria-label="Tags">
+        {% for t in page.tags %}<a class="tag" href="{{ url(t.url) }}">{{ t.title }}</a>{% endfor %}
+      </div>
+      {% endif %}
+
+      {% block after %}
+      <section class="feedback" aria-label="Feedback" data-feedback>
+        <span data-feedback-q>Did this answer your question?</span>
+        <div class="feedback__btns" data-feedback-btns>
+          <button type="button" class="btn btn--outline" data-feedback-yes>Yes</button>
+          <button type="button" class="btn btn--outline" data-feedback-no>No</button>
+        </div>
+        <span data-feedback-yes-msg hidden>Thanks. Noted.</span>
+        <span data-feedback-no-msg hidden>Thanks. Tell support what was missing and we will fix it.</span>
+        <a class="btn btn--primary" data-feedback-contact hidden href="{{ site.support_url or ('mailto:' ~ site.support_email ~ '?subject=' ~ ('Help article: ' ~ page.title) | urlencode) }}">Contact support</a>
+      </section>
+
+      {% if page.prev or page.next %}
+      <nav class="pager" aria-label="Previous and next">
+        {% if page.prev %}
+        <a class="card" href="{{ url(page.prev.url) }}"><span class="pager__dir">← Previous</span><span class="pager__title">{{ page.prev.title }}</span></a>
+        {% endif %}
+        {% if page.next %}
+        <a class="card pager__next" href="{{ url(page.next.url) }}"><span class="pager__dir">Next →</span><span class="pager__title">{{ page.next.title }}</span></a>
+        {% endif %}
+      </nav>
+      {% endif %}
+      {% endblock %}
+    </main>
+
+    <div class="doc__toc">
+      {% if page.toc %}
+      <nav aria-label="On this page" data-toc>
+        <div class="eyebrow">ON THIS PAGE</div>
+        {% for h in page.toc %}<a class="lv{{ h.level }}" href="#{{ h.id }}">{{ h.title }}</a>{% endfor %}
+      </nav>
+      {% endif %}
+      <div class="doc__updated">Last updated <time datetime="{{ page.updated | iso }}">{{ page.updated | date }}</time></div>
+    </div>
+  </div>
+</div>
+{% endblock %}

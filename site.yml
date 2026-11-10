@@ -1,0 +1,136 @@
+# =============================================================================
+#  CrashTop Help Center — central settings
+# -----------------------------------------------------------------------------
+#  Everything that appears in more than one place lives here. Change a value
+#  once and every page, article, sitemap and feed picks it up on the next build.
+#
+#  Use any key in a template or inside a Markdown file with:
+#      {{ site.support_email }}     {{ site.min_bet }}     {{ site.main_site_url }}
+#
+#  Any top-level key can also be overridden WITHOUT editing this file, from
+#  GitHub → Settings → Secrets and variables → Actions → Variables, by adding a
+#  repository variable named SITE_<KEY IN CAPITALS>, for example:
+#      SITE_SUPPORT_EMAIL = help@crashtop.com
+#      SITE_MIN_BET       = 1.00
+# =============================================================================
+
+# --- Identity ----------------------------------------------------------------
+title: "CrashTop Help Center"
+short_title: "help"
+brand: "CRASHTOP"
+description: "Guides and articles for CrashTop: how a round works, cashing out, verifying results and managing your account."
+language: "en"
+default_author: "CrashTop Team"
+
+# --- Addresses ---------------------------------------------------------------
+# Leave `url` and `base_path` empty to let the GitHub Action detect them
+# (works for both a custom domain and username.github.io/repository).
+# Set them only if you need to force a value, e.g. url: "https://help.crashtop.com"
+url: ""
+base_path: ""
+# Custom domain. When set, a CNAME file is written into the published site.
+cname: ""
+
+main_site_url: "https://crashtop.com"
+main_site_label: "Back to game"
+
+# Public round verifier (provably fair). Used in guides, the home page and the footer.
+verifier_url: "https://crash-verify.github.io"
+verifier_label: "Round verifier"
+# A real, already-verified round used as the worked example in the verify guide.
+verifier_example_url: "https://crash-verify.github.io/#round=37191&chain=207&hash=9210d70e93de7a5456ce9d0ef76f9dbaa7f61ea99547f2a9fe39f161880b1306&seed=e252aae9b64cff17e44d99e744ed0048b626eeaaeec4f1b8675e1e8459e1399a&result=1.56"
+
+# --- Contact (CHANGE THESE) --------------------------------------------------
+support_email: "support@crashtop.com"
+support_url: ""            # optional: a ticket form or live-chat link
+telegram_url: ""           # optional
+x_url: ""                  # optional
+
+# --- Game facts used inside guides (CHANGE THESE) ----------------------------
+currency: "USDT"
+min_bet: "[MIN BET]"
+max_bet: "[MAX BET]"
+
+# --- Fixed wording -----------------------------------------------------------
+legal_note: "18+ · Play only with money you can afford to lose."
+honesty_note: "CrashTop shows data; it does not predict the next round."
+
+# --- URL structure -----------------------------------------------------------
+# Folder → address prefix.  _posts/new-post-in-help.md → /posts/new-post-in-help/
+paths:
+  article: "articles"      # files in _article/
+  post: "posts"            # files in _posts/
+  page: ""                 # files in _page/  → /<slug>/
+  category: "category"
+  tag: "tags"
+
+# --- Header navigation -------------------------------------------------------
+nav:
+  - { label: "Guides",  url: "/articles/" }
+  - { label: "Updates", url: "/posts/" }
+  - { label: "Fairness", url: "/category/provably-fair/" }
+  - { label: "Contact", url: "/contact/" }
+
+# --- Footer links ------------------------------------------------------------
+footer_links:
+  - { label: "Responsible play", url: "/responsible-play/" }
+  - { label: "Contact", url: "/contact/" }
+  - { label: "Sitemap", url: "/sitemap_index.xml" }
+  - { label: "RSS", url: "/feed.xml" }
+
+# --- Topics (categories) -----------------------------------------------------
+# `slug` is what you write in a file's `categories:` list. The order here is the
+# order used on the home page and in the side menu. A topic with no published
+# content is hidden automatically. Icons: arrow, curve, card, shield, lock, clock, book
+topics:
+  - slug: "getting-started"
+    title: "Getting started"
+    description: "Create an account and find your way around the game screen."
+    icon: "arrow"
+  - slug: "playing-a-round"
+    title: "Playing a round"
+    description: "Bets, cash-out and auto mode, explained with worked numbers."
+    icon: "curve"
+  - slug: "payments"
+    title: "Deposits and withdrawals"
+    description: "Funding your balance, withdrawal steps and processing."
+    icon: "card"
+  - slug: "provably-fair"
+    title: "Provably fair"
+    description: "Every round is fixed by a pre-committed hash chain. Here is how to check it."
+    icon: "shield"
+  - slug: "account"
+    title: "Account and security"
+    description: "Sign-in, password and keeping your account safe."
+    icon: "lock"
+  - slug: "responsible-play"
+    title: "Responsible play"
+    description: "Setting your own limits, taking a break and where to find help."
+    icon: "clock"
+  - slug: "announcements"
+    title: "Announcements"
+    description: "News about the game and this help center."
+    icon: "book"
+
+# --- Round stages on the home page ----------------------------------------------
+# Each stage links to the article whose front matter has the same `stage:` number.
+round_stages:
+  - { n: 1, title: "Place a bet",          tone: "accent",  text: "Bet amount, limits and the betting window before a round starts." }
+  - { n: 2, title: "Watch the multiplier", tone: "accent",  text: "How the multiplier climbs and what the chip colours mean." }
+  - { n: 3, title: "Cash out",             tone: "win",     text: "Manual and auto cash-out, and how a payout is calculated." }
+  - { n: 4, title: "The crash",            tone: "loss",    text: "What happens to bets that are still open when the round ends." }
+  - { n: 5, title: "Verify the round",     tone: "neutral", text: "Check any finished round against its published hash, in your browser." }
+
+# --- Home page wording -------------------------------------------------------
+home:
+  eyebrow: "HELP CENTER"
+  heading: "Follow one round, start to finish."
+  lede: "Every guide here belongs to a moment in a round, from placing a bet to verifying the result. Pick the moment you are stuck on, or search."
+  search_placeholder: "auto cash-out, verify, withdraw…"
+  support_heading: "Still stuck?"
+  support_text: "Send the round ID with your question. It lets support look at the exact round instead of asking you to describe it."
+
+# --- Build options -----------------------------------------------------------
+posts_on_home: 3
+words_per_minute: 200
+date_format: "%d %b %Y"

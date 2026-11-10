@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block body %}
+<main id="main" class="container">
+
+  <section class="hero">
+    <div class="hero__text">
+      <div class="eyebrow eyebrow--accent">{{ site.home.eyebrow }}</div>
+      <h1>{{ site.home.heading }}</h1>
+      <p class="lede">{{ site.home.lede }}</p>
+      <div class="field">
+        <label class="field-label" for="q">Search the guides</label>
+        <div class="search">
+          {{ icon('search', 18) }}
+          <input id="q" type="search" placeholder="{{ site.home.search_placeholder }}" autocomplete="off" data-filter-input>
+        </div>
+        <div class="hint">Results filter the guide list below as you type.</div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="stages" aria-label="Stages of a round">
+    {% for s in stages %}
+    {% if s.doc %}
+    <a class="card stage" href="{{ url(s.doc.url) }}">
+    {% else %}
+    <div class="card stage">
+    {% endif %}
+      <span class="stage__n tone-text-{{ s.tone }}">{{ s.n | two }}</span>
+      <span class="stage__title">{{ s.title }}</span>
+      <span class="stage__text">{{ s.text }}</span>
+    {% if s.doc %}</a>{% else %}</div>{% endif %}
+    {% endfor %}
+  </nav>
+
+  {% set article_topics = topics | selectattr('articles') | list %}
+  {% if article_topics %}
+  <section class="section" id="topics">
+    <div class="section__head">
+      <div class="eyebrow">TOPICS</div>
+      <h2>Browse by topic</h2>
+    </div>
+    <div class="topics">
+      {% for t in article_topics %}
+      <div class="card topic">
+        <span class="topic__icon">{{ icon(t.icon) }}</span>
+        <h3><a href="{{ url(t.url) }}">{{ t.title }}</a></h3>
+        {% if t.description %}<p>{{ t.description }}</p>{% endif %}
+        <div class="topic__links">
+          {% for d in t.docs[:4] %}
+          <a href="{{ url(d.url) }}">{{ d.title }}</a>
+          {% endfor %}
+          {% if t.docs | length > 4 %}<a class="more" href="{{ url(t.url) }}">All {{ t.docs | length }} in this topic</a>{% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="section guides" id="guides">
+    <div class="guides__main" data-filter>
+      <div class="section__head">
+        <div class="eyebrow">GUIDES</div>
+        <h2>All guides</h2>
+      </div>
+      <div class="tabs" role="group" aria-label="Filter by topic">
+        <button type="button" class="is-active" aria-pressed="true" data-filter-tab="">All</button>
+        {% for t in topics if t.articles %}
+        <button type="button" aria-pressed="false" data-filter-tab="{{ t.slug }}">{{ t.title }}</button>
+        {% endfor %}
+      </div>
+      <div class="rows">
+        {% for d in guides %}
+        {% include "doc-row.html" %}
+        {% endfor %}
+        <div class="empty" data-filter-empty hidden>
+          <strong>No guide matches that search.</strong>
+          <span>Try a shorter word, or send the question to support.</span>
+          <button type="button" class="btn btn--outline" data-filter-reset>Clear search</button>
+        </div>
+      </div>
+    </div>
+
+    <aside class="card quickref" aria-labelledby="qr">
+      <div class="eyebrow">QUICK REFERENCE</div>
+      <h3 id="qr">Reading the history chips</h3>
+      <div class="reflist">
+        <div><span>Crashed below 2×</span>{{ chip(1.24) }}</div>
+        <div><span>Reached 2× or more</span>{{ chip(3.1) }}</div>
+        <div><span>Reached 10× or more</span>{{ chip(14.52) }}</div>
+      </div>
+      <p>{{ site.honesty_note }} Past rounds do not change the next one.</p>
+      {% if site.verifier_url %}
+      <a class="quickref__link" href="{{ site.verifier_url }}" rel="noopener">Verify any round yourself {{ icon('external', 14) }}</a>
+      {% endif %}
+    </aside>
+  </section>
+
+  {% if posts %}
+  <section class="section" id="updates">
+    <div class="section__head section__head--row">
+      <div>
+        <div class="eyebrow">UPDATES</div>
+        <h2>From the team</h2>
+      </div>
+      <a href="{{ url('/' ~ site.paths.post ~ '/') }}">All updates</a>
+    </div>
+    <div class="rows">
+      {% set shown = (pinned | selectattr('kind', 'equalto', 'post') | list) %}
+      {% for d in shown %}{% include "doc-row.html" %}{% endfor %}
+      {% for d in (posts | rejectattr('pinned') | list)[:site.posts_on_home] %}{% include "doc-row.html" %}{% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class="support" id="support">
+    <div>
+      <h2>{{ site.home.support_heading }}</h2>
+      <p>{{ site.home.support_text }}</p>
+    </div>
+    <a class="btn btn--primary" href="{{ site.support_url or ('mailto:' ~ site.support_email) }}">Contact support</a>
+  </section>
+
+</main>
+{% endblock %}

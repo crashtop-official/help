@@ -1,0 +1,14 @@
+{# Layout for files in _posts/  →  /posts/<slug>/ #}
+{% extends "doc.html" %}
+
+{% block sidenav %}
+<nav aria-label="Recent updates">
+  <div class="sidenav__group">
+    <div class="eyebrow">RECENT UPDATES</div>
+    {% for d in posts[:8] %}
+    <a href="{{ url(d.url) }}"{% if d.url == page.url %} class="is-active" aria-current="page"{% endif %}>{{ d.title }}</a>
+    {% endfor %}
+    <a class="more" href="{{ url('/' ~ site.paths.post ~ '/') }}">All updates</a>
+  </div>
+</nav>
+{% endblock %}

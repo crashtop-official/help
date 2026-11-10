@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="{{ url('/sitemap.xsl') }}"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{% for m in maps %}
+  <sitemap>
+    <loc>{{ abs_url(m.url) }}</loc>
+    <lastmod>{{ m.lastmod | iso }}</lastmod>
+  </sitemap>
+{% endfor %}
+</sitemapindex>

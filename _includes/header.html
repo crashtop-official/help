@@ -1,0 +1,22 @@
+<header class="site-header">
+  <div class="container site-header__in">
+    <a class="logo" href="{{ url('/') }}" aria-label="{{ site.title }} home">
+      {% include "logo.svg" %}
+      <span class="logo__word">{{ site.brand }}</span>
+      <span class="logo__sub">/ {{ site.short_title }}</span>
+    </a>
+    <nav class="site-nav" aria-label="Help sections">
+      {% for item in site.nav %}
+      <a href="{{ url(item.url) }}"{% if current_url.startswith(item.url) %} class="is-active" aria-current="true"{% endif %}>{{ item.label }}</a>
+      {% endfor %}
+      {% if current_url != '/' %}
+      <form class="site-search" action="{{ url('/') }}" method="get" role="search">
+        <label class="sr-only" for="hq">Search the guides</label>
+        {{ icon('search', 16) }}
+        <input id="hq" type="search" name="q" placeholder="Search" autocomplete="off">
+      </form>
+      {% endif %}
+      <a class="btn btn--outline btn--sm" href="{{ site.main_site_url }}">{{ site.main_site_label }} {{ icon('external', 14) }}</a>
+    </nav>
+  </div>
+</header>
