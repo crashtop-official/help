@@ -6,12 +6,6 @@
 #
 #  Use any key in a template or inside a Markdown file with:
 #      {{ site.support_email }}     {{ site.min_bet }}     {{ site.main_site_url }}
-#
-#  Any top-level key can also be overridden WITHOUT editing this file, from
-#  GitHub → Settings → Secrets and variables → Actions → Variables, by adding a
-#  repository variable named SITE_<KEY IN CAPITALS>, for example:
-#      SITE_SUPPORT_EMAIL = help@crashtop.com
-#      SITE_MIN_BET       = 1.00
 # =============================================================================
 
 # --- Identity ----------------------------------------------------------------
@@ -26,7 +20,7 @@ default_author: "CrashTop Team"
 # Leave `url` and `base_path` empty to let the GitHub Action detect them
 # (works for both a custom domain and username.github.io/repository).
 # Set them only if you need to force a value, e.g. url: "https://help.crashtop.com"
-url: ""
+url: "https://help.crashtop.com"
 base_path: ""
 # Custom domain. When set, a CNAME file is written into the published site.
 cname: ""
